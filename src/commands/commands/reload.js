@@ -56,10 +56,10 @@ module.exports = class ReloadCommandCommand extends Command {
 		}
 
 		if(isCmd) {
-			await msg.reply(`Reloaded \`${cmdOrGrp.name}\` command${this.client.shard ? ' on all shards' : ''}.`);
+			await msg.say(`👌🏻 | Reloaded \`${cmdOrGrp.name}\` command${this.client.shard ? ' on all shards' : ''}.`);
 		} else {
-			await msg.reply(
-				`Reloaded all of the commands in the \`${cmdOrGrp.name}\` group${this.client.shard ? ' on all shards' : ''}.`
+			await msg.say(
+				`👌🏻 | Reloaded all of the commands in the \`${cmdOrGrp.name}\` group${this.client.shard ? ' on all shards' : ''}.`
 			);
 		}
 		return null;

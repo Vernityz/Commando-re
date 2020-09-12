@@ -207,7 +207,7 @@ module.exports = Structures.extend('Message', Message => {
 					 * (if applicable - see {@link Command#run})
 					 */
 					this.client.emit('commandCancel', this.command, collResult.cancelled, this, collResult);
-					return this.reply(`Ok, Cancelled the command.`);
+					return this.say('Cancelled the command');
 				}
 				args = collResult.values;
 			}

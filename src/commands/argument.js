@@ -178,14 +178,14 @@ class Argument {
 			}
 
 			// Prompt the user for a new value
-			prompts.push(await msg.embed({ color: '#2F3136', description: stripIndents`
-				**${empty ? this.prompt : valid ? valid : `You provided an invalid ${this.label}. Please try again.`}**
+			prompts.push(await msg.reply(stripIndents`
+				**${empty ? this.prompt : valid ? valid : `Upss, invalid ${this.label}. Can you be more specific, and please try again`}**
 
 				${oneLine`
 					Type \`cancel\` to cancel the command.
 					${wait ? `Im waiting on ${this.wait} seconds.` : ''}
 				`}
-			` }));
+			`));
 
 			// Get the user's response
 			const responses = await msg.channel.awaitMessages(msg2 => msg2.author.id === msg.author.id, {
@@ -264,27 +264,27 @@ class Argument {
 				// Prompt the user for a new value
 				if(val) {
 					const escaped = escapeMarkdown(val).replace(/@/g, '@\u200b');
-					prompts.push(await msg.embed({ color: '#2F3136', description: stripIndents`
+					prompts.push(await msg.reply(stripIndents`
 						${valid ? valid : oneLine`
-							**You provided an invalid ${this.label},
+							Upss,, invalid ${this.label},
 							"${escaped.length < 1850 ? escaped : '[too long to show]'}".
-							Please try again.**
+							Can you more be specific, and please try again.
 						`}
 
 						${oneLine`
 							Type \`cancel\` to cancel the command, or \`finish\` to finish entry up to this point.
 							${wait ? `Im waiting on ${this.wait} seconds.` : ''}
 						`}
-					` }));
+					`));
 				} else if(results.length === 0) {
-					prompts.push(await msg.embed({ color: '#2F3136', description: stripIndents`
+					prompts.push(await msg.reply(stripIndents`
 						**${this.prompt}**
 
 						${oneLine`
-							Respond with \`cancel\` to cancel the command, or \`finish\` to finish entry.
-							${wait ? `The command will automatically be cancelled in ${this.wait} seconds, unless you respond.` : ''}
+							Type \`cancel\` to cancel the command, or \`finish\` to finish entry.
+							${wait ? `Im waiting on ${this.wait} seconds, unless you respond.` : ''}
 						`}
-					` }));
+					`));
 				}
 
 				// Get the user's response

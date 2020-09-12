@@ -305,16 +305,16 @@ class Command {
 	onBlock(message, reason, data) {
 		switch(reason) {
 			case 'guildOnly':
-				return message.reply(`\`${this.name}\` command must be used in a server.`);
+				return message.say(`\`${this.name}\` command must be used in a server.`);
 			case 'nsfw':
-				return message.reply(`Ah,, Require NSFW channel to run \`${this.name}\` command.`);
+				return message.say(`\`${this.name}\` command Only work on NSFW channel`);
 			case 'permission': {
 				if(data.response) return message.reply(data.response);
-				return message.reply(`Sorry, You do not have permission to use the \`${this.name}\` command.`);
+				return message.say(`Sorry, You do not have permission to use the \`${this.name}\` command.`);
 			}
 			case 'clientPermissions': {
 				if(data.missing.length === 1) {
-					return message.reply(
+					return message.say(
 						`Ahh, I need the "${permissions[data.missing[0]]}" permission for the \`${this.name}\` command to work.`
 					);
 				}
@@ -325,7 +325,7 @@ class Command {
 			}
 			case 'throttling': {
 				// eslint-disable-next-line max-len
-				return message.embed({ color: 'RED', description: `No! You are in cooldown. \nUse \`${this.name}\` command again on ${data.remaining.toFixed(1)} seconds.` });
+				return message.reply(`Just wait a little bit, this commands is being cooldown\nUse \`${this.name}\` command again on ${data.remaining.toFixed(1)} seconds.`);
 			}
 			default:
 				return null;
@@ -349,11 +349,9 @@ class Command {
 			return `${or}${escapeMarkdown(usr.username)}#${usr.discriminator}`;
 		}).join(owners.length > 2 ? ', ' : ' ') : '';
 		const invite = this.client.options.invite;
-		return message.reply(stripIndents`**ERROR**
-		Upss, i got an error while running the command
-		**${err.name}: ${err.message}**
-		This is developer fault :(
-		Please Contact ${ownerList || 'the bot owner'}${invite ? ` in this server: ${invite}` : '.'}
+		return message.reply(stripIndents`
+		Oh noo... **${err.name}: ${err.message}**
+		It's my developer's fault, if you see this message please report to ${ownerList || 'the bot owner'}${invite ? ` in this server: ${invite}` : '.'}
 		`);
 	}
 

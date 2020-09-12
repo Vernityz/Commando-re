@@ -22,10 +22,13 @@ module.exports = class ListGroupsCommand extends Command {
 	}
 
 	run(msg) {
-		return msg.reply(stripIndents`
-			__**Groups**__
+		return msg.say(stripIndents`
+			__All my groups__
 			${this.client.registry.groups.map(grp =>
-				`**${grp.name}:** ${grp.isEnabledIn(msg.guild) ? 'Enabled' : 'Disabled'}`
+				`**${grp.name}:** ${grp.isEnabledIn(msg.guild) ? '✔' : '❌'}
+				
+				✔ : Enabled || ❌ : Disabled
+				`
 			).join('\n')}
 		`);
 	}

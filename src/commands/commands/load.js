@@ -65,7 +65,7 @@ module.exports = class LoadCommandCommand extends Command {
 			}
 		}
 
-		await msg.reply(`Loaded \`${command.name}\` command${this.client.shard ? ' on all shards' : ''}.`);
+		await msg.say(`👌🏻 | Loaded \`${command.name}\` command${this.client.shard ? ' on all shards' : ''}.`);
 		return null;
 	}
 };
