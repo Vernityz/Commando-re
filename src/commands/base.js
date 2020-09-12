@@ -252,7 +252,8 @@ class Command {
 		if(ownerOverride && this.client.isOwner(message.author)) return true;
 
 		if(this.ownerOnly && (ownerOverride || !this.client.isOwner(message.author))) {
-			return `B-Bakaaa, You are trying to run the \`${this.name}\` command, But Nope.....`;
+			return;
+			// `B-Bakaaa, You are trying to run the \`${this.name}\` command, But Nope.....`;
 		}
 
 		if(message.channel.type === 'text' && this.userPermissions) {
@@ -325,7 +326,7 @@ class Command {
 			}
 			case 'throttling': {
 				// eslint-disable-next-line max-len
-				return message.reply(`Just wait a little bit, this commands is being cooldown\nUse \`${this.name}\` command again on ${data.remaining.toFixed(1)} seconds.`);
+				return message.reply(`Just wait a little bit, this command is being cooldown\nUse \`${this.name}\` command again on ${data.remaining.toFixed(1)} seconds.`);
 			}
 			default:
 				return null;
