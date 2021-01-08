@@ -520,6 +520,7 @@ module.exports = Structures.extend('Message', Message => {
 });
 
 function channelIDOrDM(channel) {
+	if(!channel) return '';
 	if(channel.type !== 'dm') return channel.id;
 	return 'dm';
 }
